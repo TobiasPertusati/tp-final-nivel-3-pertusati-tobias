@@ -46,7 +46,7 @@ namespace Interfaz_Web
 
                     int idSel = int.Parse(idSeleccionado);
                     articuloNegocio negocio = new articuloNegocio();
-                    Articulo articuloSel = (negocio.listarArticulos(idSeleccionado))[0];
+                    Articulo articuloSel = negocio.listarArticulos(idSeleccionado)[0];
 
                     // Precargar los campos
                     txtId.Text = idSeleccionado;

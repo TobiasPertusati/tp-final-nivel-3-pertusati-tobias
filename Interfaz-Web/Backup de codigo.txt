@@ -90,3 +90,22 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
+                        // UTILIZO LA BUSQUEDA BINARIA PARA ENCONTRAR EL ARTICULO EN LA LISTA
+                        // YA QUE AL PERMITIRLE AL ADMIN ELIMINAR ARTICULOS DE LA BASE DE DATOS (ELIMINACION FISICA) SUCEDE
+                        // QUE EL ID DEL ARTICULO NO ES IGUAL AL INDICE DE ESE MISM0 ARTICULO EN LA LISTA
+                        //int pos = -1, izq = 0, der = lalista.Count() - 1;
+                        //while (izq <= der)
+                        //{
+                        //    int c = (izq + der) / 2;
+                        //    if (lalista[c].Id == idArticulo)
+                        //    {
+                        //        pos = c;
+                        //        break;
+                        //    }
+                        //    if (idArticulo > lalista[c].Id)
+                        //        izq = c + 1;
+                        //    else
+                        //        der = c - 1;
+                        //}
+                        //articulodetalle = lalista[pos];
