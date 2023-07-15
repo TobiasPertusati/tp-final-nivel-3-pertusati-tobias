@@ -44,8 +44,11 @@
     <Compile Include="AccesoADatos.cs" />
     <Compile Include="articuloNegocio.cs" />
     <Compile Include="categoriaNegocio.cs" />
+    <Compile Include="favoritosNegocio.cs" />
     <Compile Include="marcaNegocio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seguridad.cs" />
+    <Compile Include="userNegocio.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Dominio\Dominio.csproj">

@@ -13,13 +13,15 @@ namespace Negocio
     {
         private AccesoADatos datos = new AccesoADatos();
 
-        public List<Articulo> listarArticulos()
+        public List<Articulo> listarArticulos(string id = "")
         {
             List<Articulo> articulosList = new List<Articulo>();
-
             try
             {
-                datos.setearConsulta("select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion Marca,C.Descripcion Categoria, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdCategoria = C.Id and A.IdMarca = M.Id\r\n");
+                string consulta = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion Marca,C.Descripcion Categoria, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdCategoria = C.Id and A.IdMarca = M.Id";
+                if (id != "")
+                    consulta += " and A.Id = " + id;
+                datos.setearConsulta(consulta);
                 datos.ejecutarLectura();
                 leerDatos(articulosList);
                 return articulosList;
