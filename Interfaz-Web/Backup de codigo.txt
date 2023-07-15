@@ -1,0 +1,92 @@
+﻿<div class="row row-cols-sm-4 me-5 ms-5 mb-4">
+        <%for (int i = 0; i < 8; i++)
+            {
+                List<Dominio.Articulo> lista = (List<Dominio.Articulo>)Session["listaArticulos"];
+                Dominio.Articulo articulo = lista[i]; %>
+
+        <div class="col d-flex justify-content-center mb-2">
+            <div class="card mb-4" style="width: 320px; height: 350px;">
+                <img src="<%:articulo.UrlImagen%>" class="card-img-top object-fit-contain" style="width: auto; height: 205px;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%: articulo.Nombre %></h5>
+                    <p class="card-text"><%: articulo.Descripcion %></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <b class="text-body-emphasis pt-2">$ <%:articulo.Precio%></b>
+                    <a href="DetalleArticulo.aspx?id=<%:articulo.Id%>" class="btn btn-link">Ver en detalle</a>
+                </div>
+            </div>
+        </div>
+        <%} //Aca las marcas podrian tener asociadas una URL en la base, así no las tendria que cargar en el load %>
+    </div>
+    <h2 class="text-center text-light-emphasis mb-4">Nuestras Marcas</h2>
+    <div class="row g-3 row-cols-5">
+        <%foreach (Dominio.Marca marca in (List<Dominio.Marca>)Session["listaMarcas"])
+          {%>
+        <div class="col d-flex justify-content-center">
+            <div class="card" style="width: 18rem;">
+                <img src="<%:marca.UrlImagen%>" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%:marca.Descripcion%></h5>
+                    <a href="ArticulosPorMarca.aspx?idMarca=<%:marca.Id%>" class="btn btn-outline-primary">Ver productos</a>
+                </div>
+            </div>
+        </div>
+        <%} %>
+    </div>
+
+
+
+    -----------------------------------            PRUEBA DE CARRUCEL          ------------------------------
+
+    <div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+       <div class="card mb-4" style="width: 320px; height: 350px;">
+                <img src="<%:articulo.UrlImagen%>" class="card-img-top object-fit-contain" style="width: auto; height: 205px;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%: articulo.Nombre %></h5>
+                    <p class="card-text"><%: articulo.Descripcion %></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <b class="text-body-emphasis pt-2">$ <%:articulo.Precio%></b>
+                    <a href="DetalleArticulo.aspx?id=<%:articulo.Id%>" class="btn btn-link">Ver en detalle</a>
+                </div>
+            </div>
+    </div>
+    <div class="carousel-item">
+       <div class="card mb-4" style="width: 320px; height: 350px;">
+                <img src="<%:articulo.UrlImagen%>" class="card-img-top object-fit-contain" style="width: auto; height: 205px;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%: articulo.Nombre %></h5>
+                    <p class="card-text"><%: articulo.Descripcion %></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <b class="text-body-emphasis pt-2">$ <%:articulo.Precio%></b>
+                    <a href="DetalleArticulo.aspx?id=<%:articulo.Id%>" class="btn btn-link">Ver en detalle</a>
+                </div>
+            </div>
+    </div>
+    <div class="carousel-item">
+       <div class="card mb-4" style="width: 320px; height: 350px;">
+                <img src="<%:articulo.UrlImagen%>" class="card-img-top object-fit-contain" style="width: auto; height: 205px;" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title"><%: articulo.Nombre %></h5>
+                    <p class="card-text"><%: articulo.Descripcion %></p>
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <b class="text-body-emphasis pt-2">$ <%:articulo.Precio%></b>
+                    <a href="DetalleArticulo.aspx?id=<%:articulo.Id%>" class="btn btn-link">Ver en detalle</a>
+                </div>
+            </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>

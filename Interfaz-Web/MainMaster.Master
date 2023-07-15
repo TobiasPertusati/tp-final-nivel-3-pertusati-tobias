@@ -1,0 +1,80 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="Interfaz_Web.MainMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title>Sitio Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <asp:ScriptManager runat="server" />
+        <nav class="navbar navbar-dark navbar-expand-lg bg-dark mb-2">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="Default.aspx">Articulos Web</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Default.aspx">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Favoritos.aspx">Favoritos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
+                        </li>
+                        <%if (Negocio.Seguridad.esAdmin(Session["usuario"]) && Session["usuario"] != null)
+                          {%>
+                        <li class="nav-item">
+                            <a class="nav-link" href="ListadoArticulos.aspx">Listado Articulos</a>
+                        </li>
+                        <%}%>
+                    </ul>
+                    <div class="me-3">
+                        <%if (!(Negocio.Seguridad.sesionActiva(Session["usuario"])))
+                          {%>
+                        <a href="Login.aspx" class="btn btn-primary">Ingresar</a>
+                        <a href="Registro.aspx" class="btn btn-success">Registrase</a>
+                        <%}
+                          else
+                          {%>                      
+                        <a href="MiPerfil.aspx" class="btn">
+                            <asp:Label Text="" CssClass="text-bg-dark" ID="lbNombre" runat="server" />
+                            <asp:Image ID="imgPerfil" CssClass="img-fluid" Style="width: 42px; height: 36px; border-radius: 50%;" AlternateText="Mi Perfil" runat="server" />
+                        </a>
+                        <asp:Button Text="Cerrar Sesión" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" CssClass="btn btn-danger" runat="server" />
+                        <%}%>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                <asp:ScriptManager runat="server" />
+            </asp:ContentPlaceHolder>
+        </div>
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item">
+                    <a href="Default.aspx" class="nav-link px-2 text-muted">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="MiPerfil.aspx" class="nav-link px-2 text-muted">Mi perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Favoritos.aspx" class="nav-link px-2 text-muted">Favoritos</a>
+                </li>
+            </ul>
+            <p class="text-center text-muted">© 2023 Catalogo, Inc</p>
+        </footer>
+    </form>
+    <script src="Js/bootstrap.min.js"></script>
+</body>
+</html>
