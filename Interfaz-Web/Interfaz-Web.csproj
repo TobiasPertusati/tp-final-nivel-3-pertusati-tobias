@@ -92,7 +92,7 @@
     <Content Include="Favoritos.aspx" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Icons\heart-fav.png" />
+    <Content Include="Icons\refresh_64px.png" />
     <Content Include="Js\bootstrap.bundle.js" />
     <Content Include="Js\bootstrap.bundle.min.js" />
     <Content Include="Js\bootstrap.esm.js" />

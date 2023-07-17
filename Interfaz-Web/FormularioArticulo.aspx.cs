@@ -38,34 +38,33 @@ namespace Interfaz_Web
                     ddlMarca.DataValueField = "Id";
                     ddlMarca.DataBind();
 
-                }
-                string idSeleccionado = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-                if (idSeleccionado != "" && !IsPostBack)
-                {
-                    btnAgregar.Text = "Modificar";
+                    string idSeleccionado = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+                    if (idSeleccionado != "")
+                    {
+                        btnAgregar.Text = "Modificar";
 
-                    int idSel = int.Parse(idSeleccionado);
-                    articuloNegocio negocio = new articuloNegocio();
-                    Articulo articuloSel = (negocio.listarArticulos(idSeleccionado))[0];
+                        int idSel = int.Parse(idSeleccionado);
+                        articuloNegocio negocio = new articuloNegocio();
+                        Articulo articuloSel = negocio.listarArticulos(idSeleccionado)[0];
 
-                    // Precargar los campos
-                    txtId.Text = idSeleccionado;
-                    txtCodigo.Text = articuloSel.Codigo;
-                    txtDescripcion.Text = articuloSel.Descripcion;
-                    txtNombre.Text = articuloSel.Nombre;
-                    txtPrecio.Text = articuloSel.Precio.ToString();
-                    txtUrlImagen.Text = articuloSel.UrlImagen;
-                    ddlCategoria.SelectedValue = articuloSel.Categoria.Id.ToString();
-                    ddlMarca.SelectedValue = articuloSel.Marca.Id.ToString();
-                    txtUrlImagen_TextChanged(sender, e);
+                        // Precargar los campos
+                        txtId.Text = idSeleccionado;
+                        txtCodigo.Text = articuloSel.Codigo;
+                        txtDescripcion.Text = articuloSel.Descripcion;
+                        txtNombre.Text = articuloSel.Nombre;
+                        txtPrecio.Text = articuloSel.Precio.ToString();
+                        txtUrlImagen.Text = articuloSel.UrlImagen;
+                        ddlCategoria.SelectedValue = articuloSel.Categoria.Id.ToString();
+                        ddlMarca.SelectedValue = articuloSel.Marca.Id.ToString();
+                        txtUrlImagen_TextChanged(sender, e);
+                    }
+                    else
+                    {
+                        btnAgregar.Text = "Agregar";
+                        btnEliminar.Visible = false;
+                        txtId.Text = Session["ultimoId"] != null ? ((int)Session["ultimoId"] + 1).ToString() : "";
+                    }
                 }
-                else
-                {
-                    btnAgregar.Text = "Agregar";
-                    btnEliminar.Visible = false;
-                }
-                if (idSeleccionado == "")
-                    txtId.Text = Session["ultimoId"] != null ? ((int)Session["ultimoId"] + 1).ToString() : "";
             }
             catch (Exception ex)
             {

@@ -3,11 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <h1 class="text-center" runat="server" id="titulo"></h1>
     <div class="container-lg">
+        <%if ((List<Dominio.Articulo>)Session["listaxmarca"] != null)
+          {%>
+        <h1 class="text-center" runat="server" id="titulo"></h1>
         <div class="row gy-4 mb-3 mt-1">
+
             <%foreach (Dominio.Articulo articulo in (List<Dominio.Articulo>)Session["listaxmarca"])
-              {%>
+                {%>
             <div class="col-md-3">
                 <div class="card">
                     <img src="<%:articulo.UrlImagen%>" class="card-img-top object-fit-contain" style="width: auto; height: 214px;" alt="...">
@@ -23,5 +26,6 @@
             </div>
             <%}%>
         </div>
+        <%}%>
     </div>
 </asp:Content>

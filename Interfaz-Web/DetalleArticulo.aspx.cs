@@ -19,10 +19,9 @@ namespace Interfaz_Web
                 {
                     if (Request.QueryString["id"] != null)
                     {
-                        Articulo articulodetalle;
                         List<Articulo> lalista = (List<Articulo>)Session["listaArticulos"];
-                        int idArticulo = int.Parse(Request.QueryString["id"].ToString());
-
+                        string idart = Request.QueryString["id"].ToString();
+                        int idArticulo = int.Parse(idart);
                         // HAGO ESTA PREGUNTA PARA DESCARTAR IDS QUE EL USUARIO INGRESE POR LA URL QUE ESTEN FUERA DE LA LISTA DE LOS ARTICULOS.
                         if (idArticulo > lalista.Last().Id)
                         {
@@ -30,32 +29,16 @@ namespace Interfaz_Web
                             Response.Redirect("Error.aspx", false);
                             return;
                         }
-
-                        // UTILIZO LA BUSQUEDA BINARIA PARA ENCONTRAR EL ARTICULO EN LA LISTA
-                        // YA QUE AL PERMITIRLE AL ADMIN ELIMINAR ARTICULOS DE LA BASE DE DATOS (ELIMINACION FISICA) SUCEDE
-                        // QUE EL ID DEL ARTICULO NO ES IGUAL AL INDICE DE ESE MISM0 ARTICULO EN LA LISTA
-                        int pos = -1, izq = 0, der = lalista.Count() - 1;
-                        while (izq <= der)
-                        {
-                            int c = (izq + der) / 2;
-                            if (lalista[c].Id == idArticulo)
-                            {
-                                pos = c;
-                                break;
-                            }
-                            if (idArticulo > lalista[c].Id)
-                                izq = c + 1;
-                            else
-                                der = c - 1;
-                        }
-                        articulodetalle = lalista[pos];
+                        // LISTO EL ARTICULO CON LA ID
+                        articuloNegocio negocio = new articuloNegocio();
+                        Articulo articulodetalle = negocio.listarArticulos(idart)[0];
 
                         // PARA MOSTRAR PRODUCTOS RELACIONADOS (DE LA MISMA CATEGORIA)
                         List<Articulo> listaxcategoria = new List<Articulo>();
                         int cont = 0;
                         foreach (Articulo articulo in lalista)
                         {
-                            if ((articulo.Categoria.Id == articulodetalle.Categoria.Id) && (articulo != articulodetalle) && cont < 4)
+                            if ((articulo.Categoria.Id == articulodetalle.Categoria.Id) && (articulo.Id != articulodetalle.Id) && cont < 4)
                             {
                                 listaxcategoria.Add(articulo);
                                 cont++;
