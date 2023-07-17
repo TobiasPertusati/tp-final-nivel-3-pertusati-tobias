@@ -57,11 +57,3 @@
         </div>
     </div>
 </asp:Content>
-<%--     Id 
-         Codigo
-         Nombre 
-         Descripcion 
-         Marca     
-         Categoria 
-         UrlImagen 
-         Precio --%>
