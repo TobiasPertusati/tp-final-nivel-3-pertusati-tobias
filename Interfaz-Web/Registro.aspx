@@ -14,14 +14,17 @@
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Crea tu cuenta</p>
 
                                 <div class="mx-1 mx-md-4">
-                                    <div class="d-flex flex-row align-items-start mb-4">
+                                    <%-- EMAIL --%>
+                                    <div class="d-flex flex-row align-items-center mb-4">
                                         <asp:Image ImageUrl="~/Icons/usuario.png" CssClass="img-fluid pe-2 pt-1" runat="server" />                                        
-                                        <div class="form-outline flex-fill mb-0">
+                                        <div class="form-outline flex-fill mb-0 pt-2">
+                                             <asp:RegularExpressionValidator ErrorMessage="Formato incorrecto, use: ejemplo@mail.com" CssClass="text-danger" ControlToValidate="txtEmail" runat="server"
+                                                  ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"/>
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" TextMode="Email" />
                                             <label class="form-label" for="txtEmail">Email</label>
                                         </div>
                                     </div>
-
+                                    <%-- CONTRASEÑA --%>
                                     <div class="d-flex flex-row align-items-start mb-4">
                                         <asp:Image ImageUrl="~/Icons/password.png" CssClass="img-fluid pe-2 pt-1" runat="server" />
                                         <div class="form-outline flex-fill mb-0">
@@ -29,7 +32,7 @@
                                             <label class="form-label" for="txtPass">Contraseña</label>
                                         </div>
                                     </div>
-
+                                    <%-- REPETIR CONTRASEÑA --%>
                                     <div class="d-flex flex-row align-items-start mb-4">
                                         <asp:Image ImageUrl="~/Icons/password.png" CssClass="img-fluid pe-2 pt-1" runat="server" />                                        
                                         <div class="form-outline flex-fill mb-0">

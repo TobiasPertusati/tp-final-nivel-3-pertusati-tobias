@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 namespace Interfaz_Web
 {
     public partial class FormularioArticulo : System.Web.UI.Page
@@ -77,12 +78,19 @@ namespace Interfaz_Web
         {
             try
             {
-                Articulo articulo = new Articulo();
-                articuloNegocio negocio = new articuloNegocio();
-
                 //Validaciones 
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
 
+                Helper helper = new Helper();
+                if (helper.estaVacio(txtCodigo.Text) || helper.estaVacio(txtDescripcion.Text) || helper.estaVacio(txtNombre.Text)
+                    || helper.estaVacio(txtPrecio.Text) || helper.estaVacio(txtUrlImagen.Text) || helper.nadaSeleccionado(ddlMarca) || helper.nadaSeleccionado(ddlCategoria))
+                    return;
 
+                // Guardo los datos
+                articuloNegocio negocio = new articuloNegocio();
+                Articulo articulo = new Articulo();
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;

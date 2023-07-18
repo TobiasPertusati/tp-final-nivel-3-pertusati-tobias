@@ -86,6 +86,7 @@
     <Content Include="Css\bootstrap.rtl.css" />
     <Content Include="Css\bootstrap.rtl.min.css" />
     <Content Include="Css\detalleStyle.css.css" />
+    <Content Include="Css\mystyle.css" />
     <Content Include="Default.aspx" />
     <Content Include="DetalleArticulo.aspx" />
     <Content Include="Error.aspx" />
@@ -153,6 +154,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="ListadoArticulos.aspx.cs">
       <DependentUpon>ListadoArticulos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

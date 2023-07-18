@@ -18,11 +18,14 @@ namespace Interfaz_Web
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)
         {
-            User usuario = new User();
             userNegocio userNegocio = new userNegocio();
+            Helper helper = new Helper();
             try
             {
-                if (txtEmail.Text == "" || txtPass.Text == "" || txtConfirmaPass.Text == "")
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
+                if (helper.estaVacio(txtEmail.Text) || helper.estaVacio(txtPass.Text) || helper.estaVacio(txtConfirmaPass.Text))
                 {
                     lbError.Visible = true;
                     lbError.Text = "¡Completar todos los campos!";
@@ -37,11 +40,14 @@ namespace Interfaz_Web
                 else if (userNegocio.existeMail(txtEmail.Text))
                 {
                     lbError.Visible = true;
-                    lbError.Text = "Ya existe una cuenta registrada con ese mail";
+                    lbError.Text = "¡Ya existe una cuenta con ese email!";
                     return;
                 }
-                usuario.Email = txtEmail.Text;
-                usuario.Pass = txtPass.Text;
+                User usuario = new User
+                {
+                    Email = txtEmail.Text,
+                    Pass = txtPass.Text
+                };
                 usuario.Id = userNegocio.insertarNuevo(usuario);
                 Session.Add("usuario", usuario);
                 Response.Redirect("Default.aspx", false);

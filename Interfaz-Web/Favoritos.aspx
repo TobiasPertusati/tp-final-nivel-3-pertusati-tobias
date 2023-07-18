@@ -18,7 +18,7 @@
                             </a>                           
                         </div>
                         <div class="col-md-8">
-                            <asp:Button Text="Eliminar" ID="Button1" OnClick="btnEliminar_Click" CommandArgument='<%#Eval("Id")%>' CommandName="idArticulo" CssClass="bottom-0 btn btn-outline-danger end-0 mb-3 me-3 position-absolute" runat="server" />
+                            <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CommandArgument='<%#Eval("Id")%>' CommandName="idArticulo" CssClass="bottom-0 btn btn-outline-danger end-0 mb-3 me-3 position-absolute" runat="server" />
                             <div class="card-body">
                                 <h6 class="card-subtitle"><%#Eval("Marca.Descripcion")%> / <%#Eval("Categoria.Descripcion")%></h6>
                                 <h5 class="card-title"><%#Eval("Nombre")%></h5>

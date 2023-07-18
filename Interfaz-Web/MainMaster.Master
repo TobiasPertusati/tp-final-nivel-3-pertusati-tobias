@@ -7,6 +7,7 @@
     <title>Sitio Web</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="Css/mystyle.css" rel="stylesheet" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -60,8 +61,8 @@
                 <asp:ScriptManager runat="server" />
             </asp:ContentPlaceHolder>
         </div>
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <footer>
+            <ul class="nav justify-content-center border-bottom pt-2 pb-3 mb-3">
                 <li class="nav-item">
                     <a href="Default.aspx" class="nav-link px-2 text-muted">Home</a>
                 </li>
@@ -72,7 +73,7 @@
                     <a href="Favoritos.aspx" class="nav-link px-2 text-muted">Favoritos</a>
                 </li>
             </ul>
-            <p class="text-center text-muted">© 2023 Catalogo, Inc</p>
+            <p class="text-center text-muted">©<script>document.write(new Date().getFullYear())</script> Catalogo Web, Inc</p>
         </footer>
     </form>
     <script src="Js/bootstrap.min.js"></script>

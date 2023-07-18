@@ -7,14 +7,21 @@
         <h1 class="text-center m-4">Ingresa a tu cuenta</h1>
         <div class="row justify-content-center">
             <div class="col-md-6">
+                <%-- EMAIL --%>
                 <div class="form-outline mb-4">
                     <label class="form-label" for="txtEmail">Email</label>
-                    <asp:TextBox runat="server" ClientIDMode="Static" TextMode="Email" CssClass="form-control" ID="txtEmail" required/>
-                </div>    
+                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control" ID="txtEmail"/>
+                    <asp:RequiredFieldValidator ErrorMessage="Ingrese su email" CssClass="text-danger" ControlToValidate="txtEmail" runat="server" />
+                    <asp:RegularExpressionValidator ErrorMessage="Formato incorrecto, use: ejemplo@mail.com" CssClass="text-danger" ControlToValidate="txtEmail" runat="server"
+                        ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"/>
+                </div>
+                <%-- PASSWORD --%>
                 <div class="form-outline mb-2">
                     <label class="form-label" for="txtPass">Contraseña</label>
-                    <asp:TextBox runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-control" ID="txtPass" required />
+                    <asp:TextBox runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-control" ID="txtPass"/>
+                    <asp:RequiredFieldValidator ErrorMessage="Ingrese su contraseña" CssClass="text-danger" ControlToValidate="txtPass" runat="server" />
                 </div>
+
                 <div class="mb-3 mt-4 text-danger">
                     <asp:Label Visible="False" ID="lbIncorrecto" CssClass="text-center d-block" runat="server" />
                 </div>
