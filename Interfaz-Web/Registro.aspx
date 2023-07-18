@@ -14,31 +14,31 @@
                                 <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Crea tu cuenta</p>
 
                                 <div class="mx-1 mx-md-4">
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <%-- imagen --%>
+                                    <div class="d-flex flex-row align-items-start mb-4">
+                                        <asp:Image ImageUrl="~/Icons/usuario.png" CssClass="img-fluid pe-2 pt-1" runat="server" />                                        
                                         <div class="form-outline flex-fill mb-0">
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" TextMode="Email" />
-                                            <label class="form-label" for="txtEmail">Tu Email</label>
+                                            <label class="form-label" for="txtEmail">Email</label>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <%-- imagen --%>
+                                    <div class="d-flex flex-row align-items-start mb-4">
+                                        <asp:Image ImageUrl="~/Icons/password.png" CssClass="img-fluid pe-2 pt-1" runat="server" />
                                         <div class="form-outline flex-fill mb-0">
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtPass" TextMode="Password" />
                                             <label class="form-label" for="txtPass">Contraseña</label>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex flex-row align-items-center mb-4">
-                                        <%-- imagen --%>
+                                    <div class="d-flex flex-row align-items-start mb-4">
+                                        <asp:Image ImageUrl="~/Icons/password.png" CssClass="img-fluid pe-2 pt-1" runat="server" />                                        
                                         <div class="form-outline flex-fill mb-0">
                                             <asp:TextBox runat="server" CssClass="form-control" ID="txtConfirmaPass" TextMode="Password" />
                                             <label class="form-label" for="txtConfirmaPass">Repeti tu contraseña</label>
                                         </div>
                                     </div>
 
-                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4 text-danger">
                                         <asp:Label Text="" Visible="false" ID="lbError" runat="server" />
                                     </div>
                                     <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">

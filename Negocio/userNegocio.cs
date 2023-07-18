@@ -84,5 +84,25 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+        public bool existeMail(string email)
+        {
+            try
+            {
+                datos.setearConsulta("select email from USERS where email = @comprobarEmail");
+                datos.setearParametro("@comprobarEmail", email);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    if (!(datos.Lector["email"] is DBNull))            
+                        return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally { datos.cerrarConexion();}
+        }
     }
 }

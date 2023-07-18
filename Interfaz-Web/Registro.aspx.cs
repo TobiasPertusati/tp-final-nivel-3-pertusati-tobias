@@ -22,10 +22,22 @@ namespace Interfaz_Web
             userNegocio userNegocio = new userNegocio();
             try
             {
-                if (!(txtPass.Text == txtConfirmaPass.Text))
+                if (txtEmail.Text == "" || txtPass.Text == "" || txtConfirmaPass.Text == "")
                 {
                     lbError.Visible = true;
-                    lbError.Text = "¡Las contraseñas no coinciden!";
+                    lbError.Text = "¡Completar todos los campos!";
+                    return;
+                }
+                else if (!(txtPass.Text == txtConfirmaPass.Text))
+                {
+                    lbError.Visible = true;
+                    lbError.Text = "¡Las contraseñas deben coincidir!";
+                    return;
+                }
+                else if (userNegocio.existeMail(txtEmail.Text))
+                {
+                    lbError.Visible = true;
+                    lbError.Text = "Ya existe una cuenta registrada con ese mail";
                     return;
                 }
                 usuario.Email = txtEmail.Text;
@@ -33,6 +45,7 @@ namespace Interfaz_Web
                 usuario.Id = userNegocio.insertarNuevo(usuario);
                 Session.Add("usuario", usuario);
                 Response.Redirect("Default.aspx", false);
+
             }
             catch (Exception ex)
             {

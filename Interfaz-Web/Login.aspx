@@ -8,16 +8,18 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="form-outline mb-4">
-                    <asp:TextBox runat="server" TextMode="Email" CssClass="form-control" ID="txtEmail" />
                     <label class="form-label" for="txtEmail">Email</label>
-                </div>
-                <div class="form-outline mb-4">
-                    <asp:TextBox runat="server" TextMode="Password" CssClass="form-control" ID="txtPass" />
+                    <asp:TextBox runat="server" ClientIDMode="Static" TextMode="Email" CssClass="form-control" ID="txtEmail" required/>
+                </div>    
+                <div class="form-outline mb-2">
                     <label class="form-label" for="txtPass">Contraseña</label>
+                    <asp:TextBox runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-control" ID="txtPass" required />
+                </div>
+                <div class="mb-3 mt-4 text-danger">
+                    <asp:Label Visible="False" ID="lbIncorrecto" CssClass="text-center d-block" runat="server" />
                 </div>
             </div>
         </div>
-
         <div class="row mb-4 justify-content-center">
             <div class="col-md-6 d-flex justify-content-center">
                 <asp:Button Text="Ingresar" ID="btnIngresar" OnClick="btnIngresar_Click" style="width:80%;" CssClass="btn btn-primary btn-block" runat="server" />

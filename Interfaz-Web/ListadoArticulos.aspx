@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <%if (FiltroAvanzado == true)
-                    {%>
+                  {%>
                 <div class="row">
                     <div class="col-7 col-lg-2 col-md-3">
                         <div class="mb-3">

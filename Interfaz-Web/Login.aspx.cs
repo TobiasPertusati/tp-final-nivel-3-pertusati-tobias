@@ -21,9 +21,14 @@ namespace Interfaz_Web
             User user = new User();
             try
             {
+                if (txtEmail.Text == "" || txtPass.Text == "")
+                {
+                    lbIncorrecto.Visible = true; 
+                    lbIncorrecto.Text = "Completar todos los campos!";
+                    return;
+                }
                 user.Email = txtEmail.Text;
                 user.Pass = txtPass.Text;
-
                 if (userNegocio.login(user))
                 {
                     Session.Add("usuario", user);
@@ -31,8 +36,8 @@ namespace Interfaz_Web
                 }
                 else
                 {
-                    Session.Add("error", "Usuario o contraseña incorrecta");
-                    Response.Redirect("Error.aspx", false);
+                    lbIncorrecto.Text = "Contraseña o email incorrectos!";
+                    lbIncorrecto.Visible = true;
                 }
             }
             catch (Exception ex)
