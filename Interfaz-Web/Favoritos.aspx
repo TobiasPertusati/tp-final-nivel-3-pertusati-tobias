@@ -13,7 +13,7 @@
                 <div class="card mb-3" style="max-width: 1200px;">
                     <div class="row g-0 justify-content-center">
                         <div class="col-md-4">
-                            <a href="DetalleArticulo.aspx?idFav=<%#Eval("Id")%>" style="width: auto; height: 214px;" class="justify-content-center d-flex">
+                            <a href="DetalleArticulo.aspx?id=<%#Eval("Id")%>" style="width: auto; height: 214px;" class="justify-content-center d-flex">
                                 <img src="<%#Eval("UrlImagen") %>" class="object-fit-contain img-fluid rounded-start" style="width: auto; height: 214px;" alt="...">
                             </a>                           
                         </div>

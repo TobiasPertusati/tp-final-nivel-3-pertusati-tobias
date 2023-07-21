@@ -18,9 +18,9 @@
                     </div>
                 </div>
                 <%if (FiltroAvanzado == true)
-                  {%>
+                    {%>
                 <div class="row">
-                    <div class="col-7 col-lg-2 col-md-3">
+                    <div class="col-10 col-lg-2 col-md-3">
                         <div class="mb-3">
                             <label class="form-label">Campo:</label>
                             <asp:DropDownList ID="ddlCampo" AutoPostBack="true" CssClass="form-select" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" runat="server">
@@ -31,22 +31,30 @@
                             </asp:DropDownList>
                         </div>
                     </div>
-                    <div class="col-7 col-lg-2 col-md-4">
+                    <div class="col-10 col-lg-2 col-md-3">
                         <div class="mb-3">
                             <label class="form-label">Criterio:</label>
                             <asp:DropDownList runat="server" ID="ddlCriterio" CssClass="form-select">
+                                <asp:ListItem Text="Mayor a" />
+                                <asp:ListItem Text="Menor a" />
+                                <asp:ListItem Text="Igual a" />
                             </asp:DropDownList>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-2 d-flex col-md-3">
+                        <%if ((bool)Session["textoFiltro"] == true)
+                          {%>
+                   <div class="col-12 col-lg-2 d-flex col-md-3">
                         <div class="mb-3">
-                            <label class="form-label">Filtro:</label>
+                            <label class="form-label" for="txtFiltroAvanzado">Filtro:</label>
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltroAvanzado" />
+                            <asp:Label Text="" ID="lbFiltro" Visible="false" CssClass="text-danger" runat="server" />
                         </div>
                     </div>
-                    <div class="align-items-md-end col-md-2 col-12 col-lg-2 d-flex justify-content-start">
-                        <div class="mb-3">
-                            <asp:Button Text="Buscar" ID="btnBusqueda" CssClass="btn btn-outline-primary" OnClick="btnBusqueda_Click" runat="server" />
+                        <%}%>
+                    <div class="col-md-3 col-12 col-lg-4 d-flex ">
+                        <div class="align-items-baseline align-items-lg-baseline align-items-md-center d-flex mb-3">
+                            <asp:Button Text="Buscar" ID="btnBusqueda" Style="margin-top: 32px;" CssClass="btn btn-outline-primary me-3" OnClick="btnBusqueda_Click" runat="server" />
+                            <asp:Label Text="" Visible="false" ID="lbAlerta" CssClass="text-danger" runat="server" />
                         </div>
                     </div>
                 </div>
@@ -54,11 +62,11 @@
             </ContentTemplate>
         </asp:UpdatePanel>
         <div class="row justify-content-center mt-3 mb-3">
-            <div class="col-12">
-                <asp:UpdatePanel runat="server">
-                    <ContentTemplate>
+            <asp:UpdatePanel runat="server">
+                <ContentTemplate>
+                    <div class="col-12">
                         <asp:GridView runat="server" ID="dgvArticulos" AutoGenerateColumns="false" OnPageIndexChanging="dgvArticulos_PageIndexChanging" CssClass="table table-bordered table-light table-responsive-sm"
-                            DataKeyNames="Id" AllowPaging="true" PageSize="20" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged">
+                            DataKeyNames="Id" AllowPaging="true" PageSize="10" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged">
                             <Columns>
                                 <asp:BoundField HeaderText="Codigo" DataField="Codigo" />
                                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
@@ -68,9 +76,12 @@
                                 <asp:CommandField HeaderText="Editar" ShowSelectButton="true" SelectText="✏" />
                             </Columns>
                         </asp:GridView>
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-around">
+                        <asp:Image ImageUrl="~/Icons/nada.jpg" ID="imgBusquedaNula" Visible="false" CssClass="img-fluid me-3 object-fit-contain" style="width:430px;" runat="server" />
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
         </div>
         <div class="row justify-content-center">
             <div class="col-auto mx-auto">

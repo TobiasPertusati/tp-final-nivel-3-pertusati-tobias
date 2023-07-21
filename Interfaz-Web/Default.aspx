@@ -22,12 +22,13 @@
                     </div>
                 </div>
             </div>
-            <%} // Aca las marcas podrian tener asociadas una IMAGEN/URL en la base, así no las tendria que cargar en el load %>
+            <%}%>
         </div>
         <h2 class="text-center text-light-emphasis mb-4">Nuestras Marcas</h2>
         <div class="row gy-4 mb-3 justify-content-center">
-            <%foreach (Dominio.Marca marca in listaMarcas)
-                {%>
+            <% // Aca las marcas podrian tener asociadas una IMAGEN/URL en la base, así no las tendria que cargar en el load
+            foreach (Dominio.Marca marca in listaMarcas)
+            {%>
             <div class="col-md-4 col-sm-10 col-lg-2 mb-3">
                 <div class="card">
                     <img src="<%:marca.UrlImagen%>" class="card-img-top object-fit-contain" alt="...">
@@ -37,7 +38,7 @@
                     </div>
                 </div>
             </div>
-            <%}%>
+          <%}%>
         </div>
     </div>
 </asp:Content>

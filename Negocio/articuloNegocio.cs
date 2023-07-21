@@ -109,8 +109,8 @@ namespace Negocio
         {
             List<Articulo> lista_filtrada = new List<Articulo>();
             try
-            {   
-                string consulta = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion Marca,C.Descripcion Categoria, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdCategoria = C.Id and A.IdMarca = M.Id and ";
+            {
+                string consulta = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.ImagenUrl, A.Precio, M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdCategoria = C.Id and A.IdMarca = M.Id and ";
                 switch (campo)
                 {
                     case "Precio":
@@ -130,13 +130,26 @@ namespace Negocio
                         }
                         break;
                     case "Codigo":
-                        consulta = manejarConsulta(consulta, criterio, filtro, "A.Codigo");
+                        switch (criterio)
+                        {
+                            case "Empieza con":
+                                consulta += "A.Codigo like '" + filtro + "%' ";
+                                break;
+
+                            case "Termina con":
+                                consulta += "A.Codigo like '%" + filtro + "'";
+                                break;
+
+                            default:
+                                consulta += "A.Codigo like '%" + filtro + "%' ";
+                                break;
+                        }
                         break;
                     case "Marca":
-                        consulta = manejarConsulta(consulta, criterio, filtro, "M.Descripcion");
+                        consulta += "M.Descripcion = '" + criterio + "'";
                         break;
                     default:
-                        consulta = manejarConsulta(consulta, criterio, filtro, "C.Descripcion");
+                        consulta += "C.Descripcion = '" + criterio + "'";
                         break;
                 }
                 datos.setearConsulta(consulta);
@@ -175,24 +188,6 @@ namespace Negocio
 
                 lista.Add(aux);
             }
-        }
-        public string manejarConsulta(string consulta, string criterio, string filtro, string nombre)
-        {
-            switch (criterio)
-            {
-                case "Empieza con":
-                    consulta += nombre + " like '" + filtro + "%' ";
-                    break;
-
-                case "Termina con":
-                    consulta += nombre + " like '%" + filtro + "'";
-                    break;
-
-                default:
-                    consulta += nombre + " like '%" + filtro + "%' ";
-                    break;
-            }
-            return consulta;
         }
     }
 }

@@ -2,7 +2,9 @@
 using Negocio;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -20,19 +22,28 @@ namespace Interfaz_Web
                 {
                     Session.Add("error", "Se requieren permisos de admin para acceder a esta pantalla");
                     Response.Redirect("Error.aspx", false);
-                }         
+                }
                 FiltroAvanzado = chkFiltroAvanzado.Checked;
-                if (!IsPostBack) 
+                if (!IsPostBack)
                 {
+                    //GENERO LA LISTA DE ARTICULOS Y LA BINDEO AL DGV Y AGREGO OTROS PARAMETROS A SESSION
                     articuloNegocio negocio = new articuloNegocio();
                     List<Articulo> articulos = negocio.listarArticulos();
+
                     Session.Add("listaArticulos", articulos);
                     Session.Add("ultimoId", articulos.Last().Id);
+                    Session.Add("BusquedaEjecutada", false);
+                    Session.Add("textoFiltro", true);
+
                     dgvArticulos.DataSource = articulos;
                     dgvArticulos.DataBind();
-                }
-                   
 
+                    // ME TRAIGO LAS LISTAS DE MARCA Y CATEGORIA PARA ASIGNARLOS AL DDLCRITERIO
+                    categoriaNegocio categoriaNegocio = new categoriaNegocio();
+                    Session.Add("listaCategorias",categoriaNegocio.listar_categorias());
+                    marcaNegocio marcaNegocio = new marcaNegocio();
+                    Session.Add("listaMarcas", marcaNegocio.listar_marcas());
+                }
             }
             catch (Exception ex)
             {
@@ -44,6 +55,10 @@ namespace Interfaz_Web
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             dgvArticulos.PageIndex = e.NewPageIndex;
+            if ((bool)Session["BusquedaEjecutada"] == false)
+                dgvArticulos.DataSource = (List<Articulo>)Session["listaArticulos"];
+            else
+                dgvArticulos.DataSource = (List<Articulo>)Session["listaFiltrada"];
             dgvArticulos.DataBind();
         }
 
@@ -56,15 +71,25 @@ namespace Interfaz_Web
         protected void txtFiltroRapido_TextChanged(object sender, EventArgs e)
         {
             string texto = txtFiltroRapido.Text.ToUpper();
-            List<Articulo> lista_filtrada = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Codigo.ToUpper().Contains(texto) 
+            List<Articulo> lista_filtrada = ((List<Articulo>)Session["listaArticulos"]).FindAll(x => x.Codigo.ToUpper().Contains(texto)
             || x.Nombre.ToUpper().Contains(texto) || x.Marca.Descripcion.ToUpper().Contains(texto) || x.Categoria.Descripcion.ToUpper().Contains(texto));
             dgvArticulos.DataSource = lista_filtrada;
             dgvArticulos.DataBind();
+            if (lista_filtrada.Count > 0)
+            {
+                Session["BusquedaEjecutada"] = true;
+                Session.Add("listaFiltrada", lista_filtrada);
+                imgBusquedaNula.Visible = false;
+            }
+            else
+                imgBusquedaNula.Visible = true;
         }
 
         protected void btnRefresh_Click(object sender, ImageClickEventArgs e)
         {
             txtFiltroRapido.Text = "";
+            imgBusquedaNula.Visible = false;
+            Session["BusquedaEjecutada"] = false;
             dgvArticulos.DataSource = (List<Articulo>)Session["listaArticulos"];
             dgvArticulos.DataBind();
         }
@@ -83,12 +108,30 @@ namespace Interfaz_Web
                 ddlCriterio.Items.Add("Mayor a");
                 ddlCriterio.Items.Add("Menor a");
                 ddlCriterio.Items.Add("Igual a");
+                Session["textoFiltro"] = true;
+            }
+            else if (ddlCampo.SelectedItem.ToString() == "Marca")
+            {
+                ddlCriterio.DataSource = (List<Marca>)Session["listaMarcas"];
+                ddlCriterio.DataTextField = "Descripcion";
+                ddlCriterio.DataValueField = "Id";
+                ddlCriterio.DataBind();
+                Session["textoFiltro"] = false;
+            }
+            else if(ddlCampo.SelectedItem.ToString() == "Categoria")
+            {
+                ddlCriterio.DataSource = (List<Categoria>)Session["listaCategorias"];
+                ddlCriterio.DataTextField = "Descripcion";
+                ddlCriterio.DataValueField = "Id";
+                ddlCriterio.DataBind();
+                Session["textoFiltro"] = false;
             }
             else
             {
                 ddlCriterio.Items.Add("Empieza con");
                 ddlCriterio.Items.Add("Termina con");
                 ddlCriterio.Items.Add("Contiene");
+                Session["textoFiltro"] = true;
             }
         }
 
@@ -97,13 +140,42 @@ namespace Interfaz_Web
             articuloNegocio negocio = new articuloNegocio();
             try
             {
-                //Validar (FILTRO) que cuando campo esta en precio no se escriban letras ni letras raras
-                // Validar que no vayan empty el ddlCriterio cuando se apreta el boton
+                Helper helper = new Helper();
+
+                // si el ddl es precio o codigo
+                if (ddlCampo.Items.ToString() == "Precio" || ddlCampo.Items.ToString() == "Codigo")
+                {
+                    if (helper.nadaSeleccionado(ddlCriterio) || helper.nadaSeleccionado(ddlCampo) || helper.estaVacio(txtFiltroAvanzado.Text))
+                    {
+                        lbAlerta.Visible = true;
+                        lbAlerta.Text = "Completar todos los campos";
+                        return;
+                    }
+                    if (ddlCampo.SelectedItem.ToString() == "Precio" && !Regex.IsMatch(txtFiltroAvanzado.Text, "\\s*([\\d,]+)"))
+                    {
+                        lbFiltro.Visible = true;
+                        lbFiltro.Text = "Monto no valido";
+                        return;
+                    }
+                }
+                lbAlerta.Visible = false;
+                lbFiltro.Visible = false;
+
                 string campo = ddlCampo.SelectedItem.ToString();
                 string criterio = ddlCriterio.SelectedItem.ToString();
                 string filtro = txtFiltroAvanzado.Text;
-                dgvArticulos.DataSource = negocio.listarFiltrado(campo, criterio, filtro);
+                filtro = filtro.Replace(",", ".");
+                List<Articulo> filtrada = negocio.listarFiltrado(campo, criterio, filtro);
+                dgvArticulos.DataSource = filtrada;
                 dgvArticulos.DataBind();
+                if (filtrada.Count > 0)
+                {
+                    Session["BusquedaEjecutada"] = true;
+                    Session.Add("listaFiltrada", filtrada);
+                    imgBusquedaNula.Visible = false;
+                }
+                else
+                    imgBusquedaNula.Visible = true;
 
             }
             catch (Exception ex)

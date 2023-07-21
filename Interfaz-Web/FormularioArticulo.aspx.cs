@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -43,6 +44,7 @@ namespace Interfaz_Web
                     if (idSeleccionado != "")
                     {
                         btnAgregar.Text = "Modificar";
+                        chkConfirma.Visible = false;
 
                         int idSel = int.Parse(idSeleccionado);
                         articuloNegocio negocio = new articuloNegocio();
@@ -63,6 +65,7 @@ namespace Interfaz_Web
                     {
                         btnAgregar.Text = "Agregar";
                         btnEliminar.Visible = false;
+                        chkConfirma.Visible = false;
                         txtId.Text = Session["ultimoId"] != null ? ((int)Session["ultimoId"] + 1).ToString() : "";
                     }
                 }
@@ -130,6 +133,14 @@ namespace Interfaz_Web
             articuloNegocio negocio = new articuloNegocio();
             try
             {
+                if (chkConfirma.Visible == false)
+                {
+                    chkConfirma.Visible = true;
+                    return;
+                }
+                if (!chkConfirma.Checked)               
+                    return;
+                
                 negocio.eliminarFisico(int.Parse(txtId.Text));
                 Response.Redirect("ListadoArticulos.aspx", false);
             }

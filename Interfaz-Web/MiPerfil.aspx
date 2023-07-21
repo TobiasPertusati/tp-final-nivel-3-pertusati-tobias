@@ -13,18 +13,21 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-12 col-md-6 col-lg-5">
-                <div class="mb-3">
+                <div style="margin-bottom:36px;">
                     <label for="txtEmail" class="form-label">Email</label>
                     <asp:TextBox runat="server" ID="txtEmail" TextMode="Email" CssClass="form-control" />
                 </div>
                 <div class="mb-3">
                     <label for="txtNombre" class="form-label">Nombre</label>
                     <asp:TextBox runat="server" ID="txtNombre" CssClass="form-control" />
+                    <asp:RequiredFieldValidator ErrorMessage="Ingrese su nombre" CssClass="text-danger" ControlToValidate="txtNombre" runat="server" />
                 </div>
                 <div class="mb-3">
                     <label for="txtApellido" class="form-label">Apellido</label>
                     <asp:TextBox runat="server" ID="txtApellido" CssClass="form-control" />
+                    <asp:RequiredFieldValidator ErrorMessage="Ingrese su apellido" CssClass="text-danger" ControlToValidate="txtApellido" runat="server" />
                 </div>
+                <asp:Label Text="Completar todos los campos" ID="lbFaltanCampos" CssClass="text-danger" Visible="false" runat="server" />
             </div>
             <div class="col-12 col-md-6 col-lg-5">
                 <div class="mb-1">

@@ -29,7 +29,7 @@ namespace Interfaz_Web
                     else
                         lbNombre.Text = "Yo";
 
-                    if (((User)Session["usuario"]).ImagenPerfil == null)
+                    if (string.IsNullOrEmpty(((User)Session["usuario"]).ImagenPerfil))
                         imgPerfil.ImageUrl = "https://cdn.pixabay.com/photo/2017/11/10/05/48/user-2935527_1280.png";
                     else
                         imgPerfil.ImageUrl = "~/Images/" + ((User)Session["usuario"]).ImagenPerfil;

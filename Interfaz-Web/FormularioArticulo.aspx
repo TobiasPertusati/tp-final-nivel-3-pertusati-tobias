@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h1 class="text-center">Formulario Articulo</h1>
     <div class="container">
-        <div class="row justify-content-center gy-3"> 
+        <div class="row justify-content-center gy-3">
             <div class="col-md-5">
                 <div class="mb-3 pb-3">
                     <label for="txtId" class="form-label">ID</label>
@@ -50,17 +50,22 @@
                     <asp:RequiredFieldValidator ErrorMessage="Este campo es requerido" CssClass="text-danger" ControlToValidate="txtUrlImagen" runat="server" />
                 </div>
                 <div class="mb-2">
-                    <asp:Image style="width:100%; height:350px" ID="imgArticulo" CssClass="object-fit-contain" ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png" runat="server" />
+                    <asp:Image Style="width: 100%; height: 350px" ID="imgArticulo" CssClass="object-fit-contain" ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png" runat="server" />
                 </div>
             </div>
         </div>
         <div class="row justify-content-center mt-3 mb-4">
             <div class="col-auto">
-                <div class="mb-3">
-                    <asp:Button Text="" ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary" runat="server" />
-                    <a href="ListadoArticulos.aspx" class="btn btn-secondary">Cancelar</a>
-                    <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" runat="server" />
-                </div>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <div class="mb-3">
+                            <asp:Button Text="" ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary" runat="server" />
+                            <a href="ListadoArticulos.aspx" class="btn btn-secondary">Cancelar</a>
+                            <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" runat="server" />
+                            <asp:CheckBox Text="¿Confirma eliminación?" ID="chkConfirma" runat="server" />
+                        </div>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
             </div>
         </div>
     </div>

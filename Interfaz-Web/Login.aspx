@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <%-- EMAIL --%>
-                <div class="form-outline mb-4">
+                <div class="form-outline mb-3">
                     <label class="form-label" for="txtEmail">Email</label>
                     <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control" ID="txtEmail"/>
                     <asp:RequiredFieldValidator ErrorMessage="Ingrese su email" CssClass="text-danger" ControlToValidate="txtEmail" runat="server" />

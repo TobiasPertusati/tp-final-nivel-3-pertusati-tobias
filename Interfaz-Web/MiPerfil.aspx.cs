@@ -24,7 +24,7 @@ namespace Interfaz_Web
                         txtEmail.Text = user.Email;
                         txtNombre.Text = user.Nombre;
                         txtApellido.Text = user.Apellido;
-                        if (!string.IsNullOrEmpty(user.ImagenPerfil) )
+                        if (!string.IsNullOrEmpty(user.ImagenPerfil))
                             imgPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
                     }
                 }
@@ -38,27 +38,43 @@ namespace Interfaz_Web
 
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
-            userNegocio usernegocio = new userNegocio();
+            Helper helper = new Helper();
             try
             {
-                User user = (User)Session["usuario"];
+                Page.Validate();
+                if (!Page.IsValid)
+                    return;
 
+                if (helper.estaVacio(txtApellido.Text) || helper.estaVacio(txtNombre.Text))
+                {
+                    lbFaltanCampos.Visible = true;
+                    return;
+                }
+                // VALIDO QUE LOS DATOS NO SEAN LOS MISMO PARA NO IR A LA BASE DE DATOS AL PP
+                User user = (User)Session["usuario"];
+                if (user.Nombre == txtNombre.Text && user.Apellido == txtApellido.Text && txtImagen.PostedFile.FileName == "")
+                    return;
+
+                // Guardo la imagen
                 if (txtImagen.PostedFile.FileName != "")
                 {
                     string ruta = Server.MapPath("./Images/");
-                    string nombreImg = "perfil-" + user.Id + ".jpg";
+                    string nombreImg = "perfil-" + user.Id + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + ".jpg";
                     txtImagen.PostedFile.SaveAs(ruta + nombreImg);
                     user.ImagenPerfil = nombreImg;
                 }
                 user.Nombre = txtNombre.Text;
                 user.Apellido = txtApellido.Text;
 
+                userNegocio usernegocio = new userNegocio();
                 usernegocio.actualizar(user);
 
-                //Cargar imagen
+                //Cargar imagen y nombre en perfil
                 Image img = (Image)Master.FindControl("imgPerfil");
                 img.ImageUrl = "~/Images/" + user.ImagenPerfil;
                 imgPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
+                Label lb = (Label)Master.FindControl("lbNombre");
+                lb.Text = user.Nombre;
 
             }
             catch (Exception ex)

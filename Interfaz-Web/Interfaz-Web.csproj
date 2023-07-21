@@ -93,6 +93,8 @@
     <Content Include="Favoritos.aspx" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Icons\nada.jpg" />
+    <Content Include="Icons\no-se-encontro-resultado.jpg" />
     <Content Include="Icons\password.png" />
     <Content Include="Icons\refresh_64px.png" />
     <Content Include="Icons\usuario.png" />

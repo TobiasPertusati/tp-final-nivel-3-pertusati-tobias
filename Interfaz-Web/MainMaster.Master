@@ -1,10 +1,8 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MainMaster.master.cs" Inherits="Interfaz_Web.MainMaster" %>
-
 <!DOCTYPE html>
-
 <html>
 <head runat="server">
-    <title>Sitio Web</title>
+    <title>Articulos Web</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="Css/bootstrap.min.css" rel="stylesheet" />
     <link href="Css/mystyle.css" rel="stylesheet" />
@@ -32,7 +30,7 @@
                             <a class="nav-link" href="MiPerfil.aspx">Mi Perfil</a>
                         </li>
                         <%if (Negocio.Seguridad.esAdmin(Session["usuario"]) && Session["usuario"] != null)
-                          {%>
+                            {%>
                         <li class="nav-item">
                             <a class="nav-link" href="ListadoArticulos.aspx">Listado Articulos</a>
                         </li>
@@ -40,12 +38,12 @@
                     </ul>
                     <div class="me-3">
                         <%if (!(Negocio.Seguridad.sesionActiva(Session["usuario"])))
-                          {%>
+                            {%>
                         <a href="Login.aspx" class="btn btn-primary">Ingresar</a>
                         <a href="Registro.aspx" class="btn btn-success">Registrase</a>
                         <%}
-                          else
-                          {%>                      
+                            else
+                            {%>
                         <a href="MiPerfil.aspx" class="btn">
                             <asp:Label Text="" CssClass="text-bg-dark" ID="lbNombre" runat="server" />
                             <asp:Image ID="imgPerfil" CssClass="img-fluid" Style="width: 42px; height: 36px; border-radius: 50%;" AlternateText="Mi Perfil" runat="server" />
@@ -73,7 +71,10 @@
                     <a href="Favoritos.aspx" class="nav-link px-2 text-muted">Favoritos</a>
                 </li>
             </ul>
-            <p class="text-center text-muted">©<script>document.write(new Date().getFullYear())</script> Catalogo Web, Inc</p>
+            <p class="text-center text-muted">
+                ©<script>document.write(new Date().getFullYear())</script>
+                Catalogo Web, Inc
+            </p>
         </footer>
     </form>
     <script src="Js/bootstrap.min.js"></script>

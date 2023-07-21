@@ -21,11 +21,10 @@ namespace Interfaz_Web
         {
             try
             {
+                // LOGICA DE LOS ARTICULOS Y EL INDICE
                 articuloNegocio negocio = new articuloNegocio();
                 listaArticulos = negocio.listarArticulos();
                 Session.Add("listaArticulos", listaArticulos);
-
-
 
                 marcaNegocio marcaNegocio = new marcaNegocio();
                 listaMarcas = marcaNegocio.listar_marcas();

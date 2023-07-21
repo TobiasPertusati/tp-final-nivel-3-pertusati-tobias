@@ -109,3 +109,48 @@
                         //        der = c - 1;
                         //}
                         //articulodetalle = lalista[pos];
+
+
+            <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link">Previous</a>
+                    </li>
+                    <%-- LISTA DE INDICES --%>
+                    <%for (int i = 0; i < (int)Session["cantidadPaginas"]; i++)
+                      {%>
+                    <li class="page-item">
+                        <button class="page-link"><%:i + 1%></button>
+                    </li>
+                    <%}%>
+                    <li class="page-item">
+                        <a class="page-link" href="#">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+                        ---------------------------------------- DISPLAY DE MARCAS ----------------------------
+        <h2 class="text-center text-light-emphasis mb-4">Nuestras Marcas</h2>
+        <div class="row gy-4 mb-3 justify-content-center">
+            <% // Aca las marcas podrian tener asociadas una IMAGEN/URL en la base, así no las tendria que cargar en el load
+                foreach (Dominio.Marca marca in listaMarcas)
+                {%>
+            <div class="col-md-4 col-sm-10 col-lg-2 mb-3">
+                <div class="card">
+                    <img src="<%:marca.UrlImagen%>" class="card-img-top object-fit-contain" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"><%:marca.Descripcion%></h5>
+                        <a href="ArticulosPorMarca.aspx?idMarca=<%:marca.Id%>" class="btn btn-outline-primary">Ver productos</a>
+                    </div>
+                </div>
+            </div>
+            <%}%>
+        </div>
+
+
+                                <li><a class="dropdown-item" href="ArticulosPorMarca.aspx?idMarca=1">Samsung</a></li>
+                                <li><a class="dropdown-item" href="ArticulosPorMarca.aspx?idMarca=2">Apple</a></li>
+                                <li><a class="dropdown-item" href="ArticulosPorMarca.aspx?idMarca=3">Sony</a></li>
+                                <li><a class="dropdown-item" href="ArticulosPorMarca.aspx?idMarca=4">Huawei</a></li>
+                                <li><a class="dropdown-item" href="ArticulosPorMarca.aspx?idMarca=5">Motorola</a></li>

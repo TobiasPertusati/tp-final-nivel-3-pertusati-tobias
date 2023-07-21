@@ -69,6 +69,15 @@ namespace Interfaz_Web
         protected global::System.Web.UI.WebControls.TextBox txtFiltroAvanzado;
 
         /// <summary>
+        /// lbFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbFiltro;
+
+        /// <summary>
         /// btnBusqueda control.
         /// </summary>
         /// <remarks>
@@ -78,6 +87,15 @@ namespace Interfaz_Web
         protected global::System.Web.UI.WebControls.Button btnBusqueda;
 
         /// <summary>
+        /// lbAlerta control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbAlerta;
+
+        /// <summary>
         /// dgvArticulos control.
         /// </summary>
         /// <remarks>
@@ -85,5 +103,14 @@ namespace Interfaz_Web
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvArticulos;
+
+        /// <summary>
+        /// imgBusquedaNula control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgBusquedaNula;
     }
 }
