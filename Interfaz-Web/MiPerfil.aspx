@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="Interfaz_Web.MiPerfil" %>
+﻿<%@ Page Title="Mi Perfil" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="Interfaz_Web.MiPerfil" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -33,6 +33,7 @@
                 <div class="mb-1">
                     <label for="txtImagen" class="form-label">Imagen Perfil</label>
                     <input type="file" id="txtImagen" runat="server" class="form-control mb-3" />
+                    <asp:Label Text="Formato de imagen no valido" ID="lbFormatoImagen" CssClass="text-danger" Visible="false" runat="server" />
                 </div>
                 <div class="mb-4 d-flex justify-content-center align-items-center">
                     <asp:Image ImageUrl="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM="

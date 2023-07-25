@@ -60,6 +60,15 @@ namespace Interfaz_Web
         protected global::System.Web.UI.HtmlControls.HtmlInputFile txtImagen;
 
         /// <summary>
+        /// lbFormatoImagen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbFormatoImagen;
+
+        /// <summary>
         /// imgPerfil control.
         /// </summary>
         /// <remarks>

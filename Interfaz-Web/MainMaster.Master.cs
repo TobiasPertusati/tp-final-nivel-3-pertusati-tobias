@@ -35,6 +35,17 @@ namespace Interfaz_Web
                         imgPerfil.ImageUrl = "~/Images/" + ((User)Session["usuario"]).ImagenPerfil;
                 }
 
+                // AÑADO LA CLASE ACTIVE PARA CUANDO EL USUARIO ESTE EN LA PAGINA
+                if (Page is Default)
+                    home.Attributes.Add("Class", "nav-link active");
+                else if (Page is Favoritos)
+                    favoritos.Attributes.Add("Class", "nav-link active");
+                else if (Page is MiPerfil)
+                    miperfil.Attributes.Add("Class", "nav-link active");
+                else if (Page is ListadoArticulos)
+                    listadoarticulos.Attributes.Add("Class", "nav-link active");
+                else if (Page is ArticulosPorMarca)
+                    marcas.Attributes.Add("Class", "nav-link dropdown-toggle active");
             }
             catch (Exception ex)
             {   

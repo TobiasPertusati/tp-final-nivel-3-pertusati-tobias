@@ -6,7 +6,7 @@
     <h1 class="text-center text-light-emphasis mb-2">Nuestros productos</h1>
     <p class="text-muted text-center">Aquí encontras todos nuestros productos</p>
     <div class="container">
-        <div class="row gy-4 mb-3 mt-1">
+        <div class="row gy-4 mb-4 mt-1">
             <%foreach (Dominio.Articulo articulo in listaArticulos)
               {%>
             <div class="col-md-4 col-12 col-lg-3">
@@ -25,16 +25,16 @@
             <%}%>
         </div>
         <h2 class="text-center text-light-emphasis mb-4">Nuestras Marcas</h2>
-        <div class="row gy-4 mb-3 justify-content-center">
+        <div class="row gy-4 mb-4 justify-content-center">
             <% // Aca las marcas podrian tener asociadas una IMAGEN/URL en la base, así no las tendria que cargar en el load
             foreach (Dominio.Marca marca in listaMarcas)
             {%>
-            <div class="col-md-4 col-sm-10 col-lg-2 mb-3">
+            <div class="col-md-4 col-sm-10 col-lg-2">
                 <div class="card">
                     <img src="<%:marca.UrlImagen%>" class="card-img-top object-fit-contain" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><%:marca.Descripcion%></h5>
-                        <a href="ArticulosPorMarca.aspx?idMarca=<%:marca.Id%>" class="btn btn-outline-primary">Ver productos</a>
+                        <a href="ArticulosPorMarca.aspx?Marca=<%:marca.Descripcion%>" class="btn btn-outline-primary">Ver productos</a>
                     </div>
                 </div>
             </div>

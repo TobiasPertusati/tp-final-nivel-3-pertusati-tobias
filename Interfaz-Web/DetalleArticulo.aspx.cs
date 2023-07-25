@@ -3,6 +3,7 @@ using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -32,6 +33,7 @@ namespace Interfaz_Web
                         // LISTO EL ARTICULO CON LA ID
                         articuloNegocio negocio = new articuloNegocio();
                         Articulo articulodetalle = negocio.listarArticulos(idart)[0];
+                        Session.Add("articulodetalle", articulodetalle);
 
                         // PARA MOSTRAR PRODUCTOS RELACIONADOS (DE LA MISMA CATEGORIA)
                         List<Articulo> listaxcategoria = new List<Articulo>();
@@ -44,15 +46,11 @@ namespace Interfaz_Web
                                 cont++;
                             }
                         }
-                        Session.Add("articulodetalle", articulodetalle);
                         Session.Add("listaxcategoria", listaxcategoria);
-
-                        //ME GUARDO EN SESSION LOS FAVORITOS DEL USUARIO PARA TENER EN CUENTA CUALES YA TIENE COMO FAVORITOS
-                        if (Seguridad.sesionActiva(Session["usuario"]))
-                        {
-                            favoritosNegocio favoritosNegocio = new favoritosNegocio();
-                            Session.Add("favs", favoritosNegocio.listarFavoritos(((User)Session["usuario"]).Id));
-                        }
+                        // Lo reseteo a 0 porque se esta cargando un nuevo articulo
+                        int contador = 0;
+                        Session.Add("contadorFav", contador);
+                        Session.Add("paginaAnterior", "DetalleArticulo.aspx?id=" + idart);
                     }
                     else
                     {
@@ -74,17 +72,25 @@ namespace Interfaz_Web
             {
                 if (!Seguridad.sesionActiva(Session["usuario"]))
                 {
+                    Response.Redirect("Login.aspx", false);
                     return;
                 }
                 else
                 {
+                    // Genero un contador por si el usuario hace muchas veces click en favorito no vaya a la base de datos siempre
+                    int contador = (int)Session["contadorFav"];
+                    contador += 1;
+                    Session["contadorFav"] = contador;
+                    if (contador > 1)
+                        return;
+
                     // TOMO LOS DATOS DEL USUARIO Y DEL ARTICULO
                     int idUser = ((User)Session["usuario"]).Id;
                     int idArticulo = ((Articulo)Session["articulodetalle"]).Id;
                     favoritosNegocio negocio = new favoritosNegocio();
-
+                    List<Favorito> favs = negocio.listarFavoritos(idUser);
                     // RECORRO LA LISTA DE FAVORITOS PARA VERIFICAR QUE EL USUARIO NO INGRESE 2 VECES EL MISMO ARTICULO A FAVORITO
-                    foreach (Favorito favorito in (List<Favorito>)Session["favs"])
+                    foreach (Favorito favorito in favs)
                     {
                         if (idArticulo == favorito.IdArticulo)
                             return;

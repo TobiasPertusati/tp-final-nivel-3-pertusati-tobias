@@ -38,7 +38,8 @@ namespace Interfaz_Web
                 if (userNegocio.login(user))
                 {
                     Session.Add("usuario", user);
-                    Response.Redirect("Default.aspx", false);
+                    string paginaAnterior = (string)Session["paginaAnterior"] ?? "Default.aspx";
+                    Response.Redirect(paginaAnterior, false);
                 }
                 else
                 {

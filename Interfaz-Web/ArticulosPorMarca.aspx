@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="ArticulosPorMarca.aspx.cs" Inherits="Interfaz_Web.ArticulosPorMarca" %>
+﻿<%@ Page Title="Articulos por marca" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="ArticulosPorMarca.aspx.cs" Inherits="Interfaz_Web.ArticulosPorMarca" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Runtime.CompilerServices;
 
 namespace Interfaz_Web
 {
@@ -56,13 +57,20 @@ namespace Interfaz_Web
                     return;
 
                 // Guardo la imagen
-                if (txtImagen.PostedFile.FileName != "")
+                string archivo = txtImagen.PostedFile.FileName;
+                if (archivo != "" && !txtImagen.PostedFile.ContentType.StartsWith("video"))
                 {
+                    lbFormatoImagen.Visible = false;
                     string ruta = Server.MapPath("./Images/");
-                    string nombreImg = "perfil-" + user.Id + "_" + DateTime.Now.Hour + "_" + DateTime.Now.Minute + ".jpg";
+                    string fecha = DateTime.Now.ToString("yyyy-MM-dd HH;mm;ss");
+                    string nombreImg = "perfil" + user.Id + "-" + fecha + ".jpg";
                     txtImagen.PostedFile.SaveAs(ruta + nombreImg);
                     user.ImagenPerfil = nombreImg;
                 }
+                else
+                    lbFormatoImagen.Visible = true;
+
+
                 user.Nombre = txtNombre.Text;
                 user.Apellido = txtApellido.Text;
 

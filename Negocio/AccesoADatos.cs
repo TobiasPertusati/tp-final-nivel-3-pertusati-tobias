@@ -22,7 +22,7 @@ namespace Negocio
         {
             //"workstation id=DB_CATALOGO_WEB_TP.mssql.somee.com;packet size=4096;user id=tobiaspertu_SQLLogin_1;pwd=lgthm4jnxh;data source=DB_CATALOGO_WEB_TP.mssql.somee.com;persist security info=False;initial catalog=DB_CATALOGO_WEB_TP"
             //server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_WEB_DB; integrated security=true");
+            conexion = new SqlConnection("workstation id=DB_CATALOGO_WEB_TP.mssql.somee.com;packet size=4096;user id=tobiaspertu_SQLLogin_1;pwd=lgthm4jnxh;data source=DB_CATALOGO_WEB_TP.mssql.somee.com;persist security info=False;initial catalog=DB_CATALOGO_WEB_TP");
             comando = new SqlCommand();
         }
 

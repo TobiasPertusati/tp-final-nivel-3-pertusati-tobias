@@ -43,6 +43,7 @@ namespace Interfaz_Web
                 }
                 else
                 {
+                    Session.Add("paginaAnterior", "Favoritos.aspx");
                     Response.Redirect("Login.aspx", false);
                 }
             }

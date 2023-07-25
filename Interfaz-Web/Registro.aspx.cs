@@ -13,7 +13,10 @@ namespace Interfaz_Web
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Session.Add("paginaAnterior", "Default.aspx");
+            }
         }
 
         protected void btnRegistrarse_Click(object sender, EventArgs e)

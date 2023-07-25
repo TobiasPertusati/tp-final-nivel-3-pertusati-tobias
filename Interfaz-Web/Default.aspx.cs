@@ -34,6 +34,7 @@ namespace Interfaz_Web
                 listaMarcas[3].UrlImagen = "https://1000logos.net/wp-content/uploads/2018/10/Huawei-logo.jpg";
                 listaMarcas[4].UrlImagen = "https://1000logos.net/wp-content/uploads/2017/04/Motorola-Logo.png";
                 Session.Add("listaMarcas", listaMarcas);
+                Session.Add("paginaAnterior", "Default.aspx");
 
             }
             catch (Exception ex)

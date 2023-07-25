@@ -15,21 +15,51 @@ namespace Interfaz_Web
         {
             try
             {
-                //Cargo el titulo con el nombre de la marca
-
-                int idMarca = Request.QueryString["idMarca"] != null ? int.Parse(Request.QueryString["idMarca"].ToString()) : 1;
-                marcaNegocio marcaNegocio = new marcaNegocio();
-                Session.Add("listaMarcas", marcaNegocio.listar_marcas());
-                titulo.InnerText = "Todos nuestros productos de " + ((List<Marca>)Session["listaMarcas"])[idMarca - 1].Descripcion;
-
-                //Me genero una nueva lista de articulos para que la id siempre esten en orden
-                List<Articulo> listaxmarca = new List<Articulo>();
-                foreach (Articulo articulo in (List<Articulo>)Session["listaArticulos"])
+                if (!IsPostBack)
                 {
-                    if (articulo.Marca.Id == idMarca)
-                        listaxmarca.Add(articulo);    
-                }    
-                Session.Add("listaxmarca", listaxmarca);
+                    if(Request.QueryString["Marca"] != null)
+                    {
+                        string nombreMarca = Request.QueryString["Marca"].ToString();
+
+
+                        // Me fijo que la marca exista, si no redirijo a la pantalla de error
+                        marcaNegocio marcaNegocio = new marcaNegocio();
+                        List<Marca> marcas = marcaNegocio.listar_marcas();
+                        int cont = 0;
+                        foreach (Marca marca in marcas)
+                        {
+                            if (marca.Descripcion == nombreMarca)
+                            {
+                                cont = 1;
+                                break;
+                            }
+                        }
+                        if (cont == 0) 
+                        {
+                            Session.Add("error", "No se econtro la marca con el nombre " + nombreMarca);
+                            Response.Redirect("Error.aspx", false);
+                        }
+
+                        //Cargo el titulo con el nombre de la marca
+                        titulo.InnerText = "Todos nuestros productos de " + nombreMarca;
+
+                        // Me genero una lista con todos los articulos 
+                        List<Articulo> listaxmarca = new List<Articulo>();
+                        foreach (Articulo articulo in (List<Articulo>)Session["listaArticulos"])
+                        {
+                            if (articulo.Marca.Descripcion == nombreMarca)
+                                listaxmarca.Add(articulo);
+                        }
+                        Session.Add("listaxmarca", listaxmarca);
+                        Session.Add("paginaAnterior", "ArituculosPorMarca.aspx?Marca=" + nombreMarca);
+
+                    }
+                    else
+                    {
+                        //Redirijo a default porque no se estaba buscando por ninguna marca
+                        Response.Redirect("Default.aspx", false);
+                    }
+                }
             }
             catch (Exception ex)
             {

@@ -4,22 +4,20 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <%if ((Dominio.Articulo)Session["articulodetalle"] != null)
-        {%>
-    <section class="darticulo container my-5">
-        <div class="row mt-5">
+      {%>
+    <section class="darticulo container mt-5 mb-3">
+        <div class="row">
             <%Dominio.Articulo articulo = (Dominio.Articulo)Session["articulodetalle"];%>
-            <div class="col-lg-5 col-md-12 col-12">
-                <h5 class="mt-3 mb-3 me-5 pe-5 d-inline"><%:articulo.Categoria.Descripcion%> / <%:articulo.Marca.Descripcion%></h5>
-                <div class="d-inline-block">
-                    <asp:UpdatePanel runat="server">
-                        <ContentTemplate>
-                            <asp:Button Text="Favorito" CssClass="btn btn-outline-primary ms-5 pb-1" ID="btnFavorito" OnClick="btnFavorito_Click" runat="server" />
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
-                </div>
+            <div class="col-lg-5 col-md-6 col-12 position-relative">
+                <h5 class="my-3 d-inline"><%:articulo.Categoria.Descripcion%> / <%:articulo.Marca.Descripcion%></h5>
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <asp:Button Text="Favorito" CssClass="btn btn-outline-primary pb-1 position-absolute end-0 top-0 me-2" ID="btnFavorito" OnClick="btnFavorito_Click" runat="server" />
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <img src="<%:articulo.UrlImagen%>" class="img-fluid object-fit-contain" style="width: 500px; height: 450px;" alt="Alternate Text" />
             </div>
-            <div class="col-lg-6 col-md-12 col-12">
+            <div class="col-lg-6 col-md-6 col-12">
                 <h3 class="py-4"><%:articulo.Nombre %></h3>
                 <h2>$ <%:articulo.Precio%></h2>
                 <h4 class="mt-5 mb-5">Detalle del Articulo</h4>
@@ -27,13 +25,13 @@
             </div>
         </div>
     </section>
-    <section id="relacionados" class="my-5 pb-5">
+    <section id="relacionados" class="my-4">
         <div class="container text-center">
             <h3>Productos Relacionados</h3>
             <hr />
         </div>
-        <%-- Leer de base de datos productos relacionados diferenciandolos x categoria (MOSTRAR 4 PRODUCTOS RELACIONADOS) --%>
-        <div class="row mx-auto container-fluid">
+        <%-- Genero una lista de 4 prodructos relacionados x categoria (MUESTRO 4 PRODUCTOS RELACIONADOS) --%>
+        <div class="row mx-auto container-fluid gy-3">
             <%foreach (Dominio.Articulo articulosRelacionado in (List<Dominio.Articulo>)Session["listaxcategoria"])
               {%>
             <div class="articulo text-center col-lg-3 col-md-4 col-12">

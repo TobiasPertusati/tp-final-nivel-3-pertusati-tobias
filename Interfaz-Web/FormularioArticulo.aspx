@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="FormularioArticulo.aspx.cs" Inherits="Interfaz_Web.FormularioArticulo" %>
+﻿<%@ Page Title="Formulario Articulo" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="FormularioArticulo.aspx.cs" Inherits="Interfaz_Web.FormularioArticulo" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -55,15 +55,17 @@
             </div>
         </div>
         <div class="row justify-content-center mt-3 mb-4">
-            <div class="col-auto">
+            <div class="col-auto pe-1">
+                <div class="mb-3">
+                    <asp:Button Text="" ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary" runat="server" />
+                    <a href="ListadoArticulos.aspx" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </div>
+            <div class="col-auto ps-0">
                 <asp:UpdatePanel runat="server">
                     <ContentTemplate>
-                        <div class="mb-3">
-                            <asp:Button Text="" ID="btnAgregar" OnClick="btnAgregar_Click" CssClass="btn btn-primary" runat="server" />
-                            <a href="ListadoArticulos.aspx" class="btn btn-secondary">Cancelar</a>
-                            <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" runat="server" />
-                            <asp:CheckBox Text="¿Confirma eliminación?" ID="chkConfirma" runat="server" />
-                        </div>
+                        <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" runat="server" />
+                        <asp:CheckBox Text="¿Confirma eliminación?" ID="chkConfirma" runat="server" />
                     </ContentTemplate>
                 </asp:UpdatePanel>
             </div>

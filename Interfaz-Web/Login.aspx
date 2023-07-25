@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Interfaz_Web.Login" %>
+﻿<%@ Page Title="Ingresa a tu cuenta" Language="C#" MasterPageFile="~/MainMaster.Master" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="Interfaz_Web.Login" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -15,10 +15,13 @@
                     <asp:RegularExpressionValidator ErrorMessage="Formato incorrecto, use: ejemplo@mail.com" CssClass="text-danger" ControlToValidate="txtEmail" runat="server"
                         ValidationExpression="^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"/>
                 </div>
-                <%-- PASSWORD --%>
+                <%-- PASSWORD  ACA UTILIZO UN "TRUCO" PARA DISPARAR EL EVENTO DE INGRESAR EN LA TXTPASS AL APRETAR ENTER --%>
                 <div class="form-outline mb-2">
                     <label class="form-label" for="txtPass">Contraseña</label>
-                    <asp:TextBox runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-control" ID="txtPass"/>
+                    <asp:Panel runat="server" DefaultButton="Enter">
+                        <asp:TextBox runat="server" TextMode="Password" ClientIDMode="Static" CssClass="form-control" ID="txtPass"/>
+                        <asp:Button style="display:none" OnClick="btnIngresar_Click" ID="Enter" runat="server" />
+                    </asp:Panel>
                     <asp:RequiredFieldValidator ErrorMessage="Ingrese su contraseña" CssClass="text-danger" ControlToValidate="txtPass" runat="server" />
                 </div>
 
